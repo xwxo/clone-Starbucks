@@ -1,0 +1,112 @@
+/* COMMON */
+body {
+  color: #333;  /*#333333=#333: 같은숫자가 반복되면 앞에 3개만 쓰면됨*/
+  font-size: 16px; /*default값이 16px 이나 브라우저에 따라 달라질 수 있어서 명시해줌*/
+  font-weight: 400; /*두께: 400=기본*/
+  line-height: 1.4; /*줄간격*/
+  font-family: 'Nanum Gothic', sans-serif;
+}
+img {
+  display: block;
+} /* 이미지는 기본적으로 블럭이 아닌 인라인 즉 글자 요소취급되어지는데 이것을 블럭으로 바꿔준다.
+    인라인 요소들에게는 베이스라인이라는 알파벳 소문자를 썼을때 글자가 밑으로 튀어나오는 공간이 있어서
+    하단에 그런 공간들에 대한 여유가 있음. */
+a {
+  text-decoration: none; /*모든 하이퍼링크 밑줄 없애줌*/
+}
+
+/* HEADER */
+header {
+  background-color: #f6f5f0;
+  border-bottom: 1px solid #c8c8c8;
+}
+/* HEADER INNER: inner는 걍 커스텀네임
+  heder 그자체는 화면 꽉채운 상단 전체인데 그중 1100px만큼의 영역에서 가운데정렬해서 노출하겠다고 선언  */
+header .inner {
+  width: 1100px;
+  height: 120px;
+  margin: 0 auto; /*상하-좌우 auto면 center정렬*/
+  position: relative; /*relative: absoulte좌표의 기준이 되어줌*/
+}
+header .logo {
+  height: 75px;
+  position: absolute; /*absolute: 위치를 부모요소를 기준으로 한다*/
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+header .sub-menu {
+  position: absolute;
+  top: 10;
+  right: 0;
+  display: flex;
+}
+header .sub-menu ul.menu {
+  font-family: Arial, sans-serif;
+  display: flex; /*수평으로 정렬 default=수직*/
+  /* Q. 왜 li에서 수평정렬 안하고 ul에서 수평정렬해야되는걸까? A. https://studiomeal.com/archives/197 */
+}
+header .sub-menu ul.menu li {
+  position: relative;
+}
+/*메뉴 사이 구분선. :: = 가상요소선택자*/
+header .sub-menu ul.menu li::before {
+  content: ""; /*가상요소선택자가 오면 content가 무조건 와야함. 들어갈 텍스트가 없다면 "";*/
+  /*display: block; 가상요소선택자는 default값이 inline이라 가로세로값을 못가지기에 block으로 바꿔줌. 밑에 position: absoulte를 통해 block요소가 되어서 생략가능*/
+  width: 1px;
+  height: 12px;
+  background-color: #e5e5e5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0; /*0은 생략가능*/
+}
+/*첫번째 li태그의 before쪽 한개*/
+header .sub-menu ul.menu li:first-child::before {
+  display: none; /*맨 왼쪽 구분선 안보이게함*/
+}
+header .sub-menu ul.menu li a {
+  font-size: 12px;
+  padding: 11px 16px; /*링크 클릭 범위를 넓혀줌*/
+  display: block; /*default: inline*/
+  color: #656565;
+}
+header .sub-menu ul.menu li a:hover {
+  color: #000;
+}
+header .sub-menu .search {
+  height: 34px;
+  position: relative; /*material-icons의 부모 포지션*/
+}
+header .sub-menu .search input {
+  width: 36px;
+  height: 34px;
+  padding: 4px 10px;
+  border: 1px solid #ccc; /*1px 실선 테두리*/
+  box-sizing: border-box; /*width와 height속성이 안쪽여백과 테두리를 포함함 <>content-box*/
+  border-radius: 5px;
+  outline: none; /*input box 선택시 outline색이 자동으로 바뀌는것을 없애줌*/
+  background-color: #fff;
+  color: #777;
+  font-size: 12px;
+  transition: width .4s; /*전환효과(기본<->focus 시 효과), 기본값=all, 방향 .시간 */
+}
+/*input box가 선택되었을때*/
+header .sub-menu .search input:focus { 
+  width: 190px;
+  border-color: #669900;
+}
+header .sub-menu .search .material-icons  {
+  height: 24px; /*margin 계산을 위해 아이콘의 크기를 넣어야함*/
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  margin: auto;
+  transition: all .4s; /*all은 생략가능*/
+}
+/*java script를 통해 추가된 search focused class에 효괴줌. 돋보기 아이콘을 투명하게*/
+header .sub-menu .search.focused .material-icons {
+  opacity: 0;
+}
