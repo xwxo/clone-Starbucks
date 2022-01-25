@@ -41,3 +41,14 @@ window.addEventListener('scroll', _.throttle(function () {
     });
   }
 }, 300)); // _.throttle(함수, 시간)
+
+
+//forEach 반복문 : 오직 Array 객체에서만 사용 가능한 메서드
+const fadeEls = document.querySelectorAll('.visual .fade-in');
+fadeEls.forEach(function (fadeEl, index) {
+  //gsap.to(요소, 지속시간, 옵션);
+  gsap.to(fadeEl, 1, { 
+    delay: (index + 1) * .7, // delay: 지연시간 0.7, 1.4, 2.1, 2.7
+    opacity: 1 //javascript가 실행되면 투명도가 1이되게
+  });
+});
